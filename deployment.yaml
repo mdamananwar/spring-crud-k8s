@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trial-k8s
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: trial-k8s
+  template:
+    metadata:
+      labels:
+        app: trial-k8s
+    spec:
+      containers:
+        - name: trial-k8s
+          image: spring-boot-fresh:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DB_HOSTNAME
+              value: "mysql"
+            - name: DB_NAME
+              value: "k8s"
+            - name: DB_USERNAME
+              value: "root"
+            - name: DB_PASSWORD
+              value: "786786"
